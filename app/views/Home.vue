@@ -1,14 +1,14 @@
 <template>
   <Page class="page" actionBarHidden="true">
-    <GridLayout rows="auto, *, auto" columns="*, *, *">
-      <Image src="~/assets/logo.png" width="195" marginTop="20" row="0" col="0" colSpan="3" @tap="currentComponent = 'CardOfTheDay'"/>
+    <GridLayout rows="auto, *, auto" columns="*, *, *, *">
+      <Image src="~/assets/logo.png" width="195" marginTop="20" row="0" col="0" colSpan="4" @tap="currentComponent = 'CardOfTheDay'"/>
       <component
         v-for="component in componentsArray" v-bind:key="component"
         v-show="component === currentComponent"
         :is="component"
         row="1"
         col="0"
-        colSpan="3"
+        colSpan="4"
       />
       <Button
         :class="navigationButtonClasses('CardOfTheDay')"
@@ -31,6 +31,13 @@
         row="2"
         col="2"
       />
+      <Button
+        :class="navigationButtonClasses('Reading')"
+        text.decode="&#xf24d;"
+        @tap="goToSubPage"
+        row="2"
+        col="3"
+      />
     </GridLayout>
   </Page>
 </template>
@@ -39,19 +46,21 @@
   import CardOfTheDay from './CardOfTheDay'
   import CardList from './CardList'
   import Reading from './Reading'
+  import Sub from './Sub'
 
   export default {
     name: 'Home',
     data() {
       return {
         currentComponent: 'CardOfTheDay',
-        componentsArray: ['CardOfTheDay', 'CardList', 'Reading'],
+        componentsArray: ['CardOfTheDay', 'CardList', 'Reading']
       }
     },
     components: {
       CardOfTheDay,
       CardList,
-      Reading
+      Reading,
+      Sub
     },
     computed: {
       navigationButtonClasses() {
@@ -60,6 +69,11 @@
           "nav-btn": true,
           "purple": component === this.currentComponent
         });
+      }
+    },
+    methods: {
+      goToSubPage () {
+        this.$navigateTo(Sub)
       }
     }
   }
