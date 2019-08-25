@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex'
   import NavBar from '../components/Navbar'
   const SwipeDirection = require("tns-core-modules/ui/gestures").SwipeDirection;
 
@@ -38,12 +39,19 @@
     components: {
       NavBar
     },
+    computed: {
+      ...mapGetters([
+        'getDisplayData'
+      ])
+    },
     methods: {
+      ...mapActions([
+        'toggleNavBar'
+      ]),
       onTap() {
-        console.log(this.$refs)
-        console.log(this.$store.getters.getDisplayData)
-        this.$store.dispatch('toggleNavBar', true)
-        console.log(this.$store.getters.getDisplayData)
+        console.log(this.getDisplayData)
+        this.toggleNavBar(true)
+        console.log(this.getDisplayData)
         this.log.unshift({ text: "You performed a tap" });
       },
       onDoubleTap() {
@@ -54,7 +62,7 @@
       },
       onSwipe(args) {
         let direction =
-          args.direction == SwipeDirection.down
+              args.direction == SwipeDirection.down
             ? "down"
             : args.direction == SwipeDirection.up
             ? "up"
