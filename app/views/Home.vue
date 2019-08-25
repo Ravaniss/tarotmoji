@@ -32,11 +32,11 @@
         col="2"
       />
       <Button
-        :class="navigationButtonClasses('Reading')"
-        text.decode="&#xf24d;"
+        text="Bluetooth"
         @tap="goToSubPage"
         row="2"
         col="3"
+        id="fourth"
       />
     </GridLayout>
   </Page>
@@ -46,7 +46,7 @@
   import CardOfTheDay from './CardOfTheDay'
   import CardList from './CardList'
   import Reading from './Reading'
-  import Sub from './Sub'
+  import Bluetooth from './Bluetooth'
 
   export default {
     name: 'Home',
@@ -60,7 +60,7 @@
       CardOfTheDay,
       CardList,
       Reading,
-      Sub
+      Bluetooth
     },
     computed: {
       navigationButtonClasses() {
@@ -73,7 +73,7 @@
     },
     methods: {
       goToSubPage () {
-        this.$navigateTo(Sub)
+        this.$navigateTo(Bluetooth)
       }
     }
   }
@@ -98,5 +98,9 @@
     background-color: rgba(255, 0, 0, 0.0);
     border-color: rgba(255, 0, 0, 0.0);
     border-width: 1;
+  }
+
+  #fourth {
+    font-size:12;
   }
 </style>
