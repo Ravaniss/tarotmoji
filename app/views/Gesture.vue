@@ -13,7 +13,7 @@
       <Label row="1" class="instructions" textWrap="true"
              text="Try to perform the following gestures in the target area—tap, double tap, long press, swipe, pinch, and rotation."></Label>
 
-      <ListView row="2" class="list-group" for="entry in log">
+      <ListView row="2" class="list-group" v-for="entry in log">
         <v-template>
           <Label class="m-20" :text="entry.text"></Label>
         </v-template>
@@ -31,8 +31,13 @@
 
   export default {
     Store,
-    data: () => {
+    data () {
       return {
+        members: [
+          { memberID: 1 },
+          { memberID: 2 },
+          { memberID: 3 }
+        ],
         log: []
       };
     },
