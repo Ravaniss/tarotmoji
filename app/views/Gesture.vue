@@ -25,15 +25,15 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
+  import { Store, mapActions, mapGetters } from 'vuex'
   import NavBar from '../components/Navbar'
   const SwipeDirection = require("tns-core-modules/ui/gestures").SwipeDirection;
 
   export default {
+    Store,
     data: () => {
       return {
-        log: [],
-        getDisplayData: false
+        log: []
       };
     },
     components: {

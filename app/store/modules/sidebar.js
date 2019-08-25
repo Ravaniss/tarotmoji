@@ -5,8 +5,8 @@ const state = {
 }
 
 const mutations = {
-  [types.DISPLAY_NAVBAR] (state, displayNavBar) {
-    state.displayNavBar = displayNavBar
+  [types.DISPLAY_NAVBAR] (state, data) {
+    state.displayNavBar = data
   }
 }
 
