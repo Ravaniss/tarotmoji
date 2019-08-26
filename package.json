@@ -21,6 +21,7 @@
     "@vue/devtools": "^5.0.6",
     "nativescript-audio": "^5.0.4",
     "nativescript-bluetooth": "^2.0.0-beta.23",
+    "nativescript-permissions": "^1.3.7",
     "nativescript-socketio": "^3.2.1",
     "nativescript-theme-core": "^1.0.6",
     "nativescript-toasty": "^1.3.0",
