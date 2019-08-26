@@ -1,5 +1,6 @@
 <template>
   <Page>
+    <ActionBar title="Bluetooth 👌" class="action-bar"></ActionBar>
     <FlexboxLayout flexDirection="column">
       <Image src="https://play.nativescript.org/dist/assets/img/NativeScript_logo.png" height="90" margin="30 0"/>
       <Button text="is Bluetooth On ?" @tap="isBluetoothOn"/>
@@ -11,8 +12,6 @@
       <Label text="5" backgroundColor="#AAAAAA"/>
       <Label text="6" backgroundColor="#999999"/>
       <ActivityIndicator :busy="isBusy" class="activity-indicator"/>
-
-      <Button text="Gesture" @tap="goToGesturePage"/>
     </FlexboxLayout>
   </Page>
 </template>
@@ -76,7 +75,7 @@
         })
       },
       goToGesturePage() {
-        this.$navigateTo(Gesture)
+        this.$navigateTo(Gesture, {frame: 'mainContent'})
       }
     },
     data() {

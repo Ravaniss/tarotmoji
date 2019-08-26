@@ -1,9 +1,6 @@
 <template>
   <Page class="page">
-    <ActionBar title="Gestures 👌" class="action-bar">
-      <Label text="MENU" @tap="openDrawer()" col="0"/>
-    </ActionBar>
-
+    <ActionBar title="Gestures & One/Many fingers detection 👌" class="action-bar"></ActionBar>
     <GridLayout ~mainContent rows="auto, auto, *, auto">
       <Label :text="getDisplayData"></Label>
       <Label row="0" class="target" text="Target Area" @tap="onTap" @doubleTap="onDoubleTap" @longPress="onLongPress" @swipe="onSwipe"
@@ -18,8 +15,6 @@
           <Label class="m-20" :text="entry.text"></Label>
         </v-template>
       </ListView>
-
-      <Button row="3" text="RadCartesian" @tap="goToNavBar"/>
     </GridLayout>
   </Page>
 </template>
@@ -82,9 +77,6 @@
       },
       onRotation() {
         this.log.unshift({ text: "You performed a rotation" });
-      },
-      goToNavBar() {
-        this.$navigateTo(NavBar)
       }
     }
   };

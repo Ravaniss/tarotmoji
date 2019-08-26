@@ -1,7 +1,9 @@
 <template>
   <MultiDrawer ref="drawer">
-    <StackLayout slot="left">
+    <StackLayout slot="left" id="menu">
       <Label text="Bluetooth" @tap="goToBluetoothPage" />
+      <Label text="Gesture" @tap="goToGesturePage" />
+      <Label text="Voice Recorder" @tap="goToVoiceRecorderPage" />
     </StackLayout>
 
     <Frame ~mainContent id="mainContent">
@@ -16,6 +18,8 @@
 <script>
   import Home from './Home'
   import Bluetooth from './Bluetooth'
+  import Gesture from './Gesture'
+  import VoiceRecorder from './VoiceRecorder'
 
   export default {
     components: {
@@ -29,7 +33,24 @@
       goToBluetoothPage () {
         this.$refs.drawer.close('left')
         this.$navigateTo(Bluetooth, {frame: 'mainContent'})
+      },
+      goToGesturePage () {
+        this.$refs.drawer.close('left')
+        this.$navigateTo(Gesture, {frame: 'mainContent'})
+      },
+      goToVoiceRecorderPage () {
+        this.$refs.drawer.close('left')
+        this.$navigateTo(VoiceRecorder, {frame: 'mainContent'})
       }
     }
   }
 </script>
+
+<style scoped>
+  Label {
+    text-align:center;
+    background-color: aquamarine;
+    padding: 15;
+    font-size: 20;
+  }
+</style>
