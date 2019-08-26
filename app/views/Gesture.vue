@@ -26,7 +26,6 @@
 
 <script>
   import { Store, mapActions, mapGetters } from 'vuex'
-  import NavBar from '../components/Navbar'
   const SwipeDirection = require("tns-core-modules/ui/gestures").SwipeDirection;
 
   export default {
@@ -40,9 +39,6 @@
         ],
         log: []
       };
-    },
-    components: {
-      NavBar
     },
     computed: {
       ...mapGetters([

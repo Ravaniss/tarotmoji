@@ -1,5 +1,5 @@
 <template>
-  <Page class="page" actionBarHidden="true">
+  <StackLayout orientation="vertical" backgroundColor="lightgray">
     <GridLayout rows="auto, *, auto" columns="*, *, *, *">
       <Image src="~/assets/logo.png" width="195" marginTop="20" row="0" col="0" colSpan="4" @tap="currentComponent = 'CardOfTheDay'"/>
       <component
@@ -39,7 +39,7 @@
         id="fourth"
       />
     </GridLayout>
-  </Page>
+  </StackLayout>
 </template>
 
 <script>
@@ -73,7 +73,7 @@
     },
     methods: {
       goToSubPage () {
-        this.$navigateTo(Bluetooth)
+        this.$navigateTo(Bluetooth, {frame: 'mainContent'})
       }
     }
   }
