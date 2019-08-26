@@ -1,6 +1,6 @@
 <template>
   <StackLayout orientation="vertical" backgroundColor="lightgray">
-    <GridLayout rows="auto, *, auto" columns="*, *, *, *">
+    <GridLayout rows="auto, *, auto" columns="*, *, *">
       <Image src="~/assets/logo.png" width="195" marginTop="20" row="0" col="0" colSpan="4" @tap="currentComponent = 'CardOfTheDay'"/>
       <component
         v-for="component in componentsArray" v-bind:key="component"
@@ -31,13 +31,6 @@
         row="2"
         col="2"
       />
-      <Button
-        text="Bluetooth"
-        @tap="goToSubPage"
-        row="2"
-        col="3"
-        id="fourth"
-      />
     </GridLayout>
   </StackLayout>
 </template>
@@ -46,7 +39,6 @@
   import CardOfTheDay from './CardOfTheDay'
   import CardList from './CardList'
   import Reading from './Reading'
-  import Bluetooth from './Bluetooth'
 
   export default {
     name: 'Home',
@@ -59,8 +51,7 @@
     components: {
       CardOfTheDay,
       CardList,
-      Reading,
-      Bluetooth
+      Reading
     },
     computed: {
       navigationButtonClasses() {
@@ -69,11 +60,6 @@
           "nav-btn": true,
           "purple": component === this.currentComponent
         });
-      }
-    },
-    methods: {
-      goToSubPage () {
-        this.$navigateTo(Bluetooth, {frame: 'mainContent'})
       }
     }
   }
