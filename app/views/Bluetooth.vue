@@ -17,9 +17,9 @@
 </template>
 
 <script>
-  import Gesture from './Gesture'
-
   import { Bluetooth } from 'nativescript-bluetooth'
+
+  import Gesture from './Gesture'
 
   const bluetooth = new Bluetooth()
 
@@ -28,22 +28,18 @@
       Gesture
     },
     methods: {
-      onItemTap: function (args) {
-        console.log('Item with index: ' + args.index + ' tapped');
-      },
-      isBluetoothOn() {
-        console.log("Button was pressed")
+      isBluetoothOn () {
         bluetooth.isBluetoothEnabled().then(enabled => {
           console.log('Enabled? ' + enabled);
         });
       },
-      enableBluetooth() {
+      enableBluetooth () {
         bluetooth.enable().then((enabled) => {
           console.log(enabled)
         })
       },
-      startScan() {
-        console.log("Start scanning");
+      startScan () {
+        console.log('Start scanning');
         bluetooth.startScanning({
           serviceUUIDs: [],
           seconds: 4,
@@ -58,7 +54,7 @@
           (err) => console.log("error while scanning: " + err)
         );
       },
-      connected() {
+      connected () {
         bluetooth.connect({
           UUID: '3C:BD:3E:6F:8F:72',
           onConnected: function (peripheral) {
@@ -74,31 +70,12 @@
           }
         })
       },
-      goToGesturePage() {
+      goToGesturePage () {
         this.$navigateTo(Gesture, {frame: 'mainContent'})
       }
     },
-    data() {
+    data () {
       return {
-        countries: [
-          {name: "Australia", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/au.png"},
-          {name: "Belgium", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/be.png"},
-          {name: "Bulgaria", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/bg.png"},
-          {name: "Canada", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/ca.png"},
-          {name: "Switzerland", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/ch.png"},
-          {name: "China", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/cn.png"},
-          {name: "Czech Republic", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/cz.png"},
-          {name: "Germany", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/de.png"},
-          {name: "Spain", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/es.png"},
-          {name: "Ethiopia", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/et.png"},
-          {name: "Croatia", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/hr.png"},
-          {name: "Hungary", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/hu.png"},
-          {name: "Italy", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/it.png"},
-          {name: "Jamaica", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/jm.png"},
-          {name: "Romania", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/ro.png"},
-          {name: "Russia", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/ru.png"},
-          {name: "United States", imageSrc: "https://play.nativescript.org/dist/assets/img/flags/us.png"},
-        ],
         isBusy: false
       }
     }

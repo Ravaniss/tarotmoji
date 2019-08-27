@@ -4,6 +4,7 @@
       <Label text="Bluetooth" @tap="goToBluetoothPage" />
       <Label text="Gesture" @tap="goToGesturePage" />
       <Label text="Voice Recorder" @tap="goToVoiceRecorderPage" />
+      <Label text="Camera" @tap="goToCameraPage" />
     </StackLayout>
 
     <Frame ~mainContent id="mainContent">
@@ -20,6 +21,7 @@
   import Bluetooth from './Bluetooth'
   import Gesture from './Gesture'
   import VoiceRecorder from './VoiceRecorder'
+  import Camera from './Camera'
 
   export default {
     components: {
@@ -41,7 +43,11 @@
       goToVoiceRecorderPage () {
         this.$refs.drawer.close('left')
         this.$navigateTo(VoiceRecorder, {frame: 'mainContent'})
-      }
+      },
+      goToCameraPage () {
+        this.$refs.drawer.close('left')
+        this.$navigateTo(Camera, {frame: 'mainContent'})
+      },
     }
   }
 </script>

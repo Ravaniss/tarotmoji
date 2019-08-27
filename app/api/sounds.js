@@ -1,4 +1,4 @@
-const appSettings = require("tns-core-modules/application-settings");
+const appSettings = require('tns-core-modules/application-settings');
 
 const sounds = {
   getSounds() {
@@ -11,7 +11,7 @@ const sounds = {
     sounds = sounds.filter(s => {
       return s.fileName != fileName;
     });
-    //serialize it
+    // serialize it
     let json = JSON.stringify(sounds);
     appSettings.setString('sounds', json);
   },
@@ -21,7 +21,7 @@ const sounds = {
       name:name,
       fileName:fileName
     });
-    //serialize it
+    // serialize it
     let json = JSON.stringify(sounds);
     appSettings.setString('sounds', json);
   }

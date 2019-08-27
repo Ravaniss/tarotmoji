@@ -21,7 +21,7 @@
 
 <script>
   import { Store, mapActions, mapGetters } from 'vuex'
-  const SwipeDirection = require("tns-core-modules/ui/gestures").SwipeDirection;
+  const SwipeDirection = require('tns-core-modules/ui/gestures').SwipeDirection;
 
   export default {
     Store,
@@ -44,19 +44,19 @@
       ...mapActions([
         'toggleNavBar'
       ]),
-      onTap() {
+      onTap () {
         console.log(this.getDisplayData)
         this.toggleNavBar(true)
         console.log(this.getDisplayData)
         this.log.unshift({ text: "You performed a tap" });
       },
-      onDoubleTap() {
+      onDoubleTap () {
         this.log.unshift({ text: "You performed a double tap" });
       },
-      onLongPress() {
+      onLongPress () {
         this.log.unshift({ text: "You performed a long press" });
       },
-      onSwipe(args) {
+      onSwipe (args) {
         let direction =
               args.direction == SwipeDirection.down
             ? "down"
@@ -69,13 +69,13 @@
           text: "You performed a " + direction + " swipe"
         });
       },
-      onPan() {
+      onPan () {
         // this.log.unshift({ text: "You performed a pan" });
       },
-      onPinch() {
+      onPinch () {
         this.log.unshift({ text: "You performend a pinch" });
       },
-      onRotation() {
+      onRotation () {
         this.log.unshift({ text: "You performed a rotation" });
       }
     }

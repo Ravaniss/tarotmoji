@@ -56,9 +56,9 @@
     computed: {
       navigationButtonClasses() {
         return component => ({
-          "fa": true,
-          "nav-btn": true,
-          "purple": component === this.currentComponent
+          'fa': true,
+          'nav-btn': true,
+          'purple': component === this.currentComponent
         });
       }
     }

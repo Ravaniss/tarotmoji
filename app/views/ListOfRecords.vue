@@ -18,50 +18,48 @@
 </template>
 
 <script>
-  const audio = require('nativescript-audio');
-  const fileSystemModule = require('tns-core-modules/file-system');
+  import * as audio from 'nativescript-audio';
+  import * as fileSystemModule from 'tns-core-modules/file-system';
   import soundsAPI from '../api/sounds';
   import VoiceRecorder from './VoiceRecorder';
 
   export default {
-    data() {
+    data () {
       return {
-        audioFolder:null,
-        sounds:[]
+        audioFolder: null,
+        sounds: []
       }
     },
-    methods:{
-      async deleteSound(event) {
+    methods: {
+      async deleteSound (event) {
         let filename = event.object.filename;
         let confirmOptions = {
-          title: "Delete Sound",
-          message: "Do you want to delete this sound?",
-          okButtonText: "Yes",
-          cancelButtonText: "No"
+          title: 'Delete Sound',
+          message: 'Do you want to delete this sound?',
+          okButtonText: 'Yes',
+          cancelButtonText: 'No'
         };
         confirm(confirmOptions).then(async result => {
-          if(result) {
-            // first delete the file
+          if (result) {
             let file = this.audioFolder.getFile(filename);
-            console.log('going to try to delete', file);
             await file.remove();
             soundsAPI.removeSound(filename);
             this.sounds = soundsAPI.getSounds();
           }
         });
       },
-      goToRecord() {
+      goToRecord () {
         this.$navigateTo(VoiceRecorder, {frame: 'mainContent'});
       },
-      async playSound(event) {
-        const file = event.object.bindingContext.fileName
+      async playSound (event) {
+        const file = event.object.bindingContext.fileName;
         let player = new audio.TNSPlayer();
         await player.playFromFile({
           audioFile: `${this.audioFolder.path}/${file}`
         });
       }
     },
-    created() {
+    created () {
       this.sounds = soundsAPI.getSounds();
       this.audioFolder = fileSystemModule.knownFolders.currentApp().getFolder('recordings');
     }

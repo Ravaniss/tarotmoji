@@ -26,33 +26,33 @@
 </template>
 
 <script>
-  import { Cards } from "../data/cards"
+  import { Cards } from '../data/cards'
 
   export default {
     name: 'CardOfTheDay',
     data () {
       return {
-        name: "",
-        meaning: "",
-        emoji: "",
-        emoji1: "",
-        emoji2: "",
-        icon: "emoji",
+        name: '',
+        meaning: '',
+        emoji: '',
+        emoji1: '',
+        emoji2: '',
+        icon: 'emoji',
         cards: Cards,
         major: true,
         reversed: false
       }
     },
     computed: {
-      shuffle() {
+      shuffle () {
         return Math.floor(Math.random() * 2);
       },
-      randomNumber() {
+      randomNumber () {
         return Math.round(Math.random() * 72);
       }
     },
     methods: {
-      getMyCard() {
+      getMyCard () {
         const card = this.cards[this.randomNumber];
         this.name = card.name;
         if (card.type !== 'major') {
