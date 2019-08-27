@@ -1,60 +1,94 @@
 <template>
-  <Page class="page">
+  <Page
+    xmlns="http://www.nativescript.org/tns.xsd"
+    xmlns:maps="nativescript-google-maps-sdk">
+
     <ActionBar class="action-bar">
-      <Label class="action-bar-title" text="Geolocation Demo"></Label>
+      <Label class="action-bar-title" text="Geolocation Demo" @tap="fetchMyLocation"></Label>
     </ActionBar>
 
     <StackLayout>
-      <Label v-if="needLocation" text="Looking up your location..." />
-      <Label v-if="locationFailure" text="Sorry, I failed! :(" />
-      <Label v-if="location" :text="locationDescription" textWrap="true" />
-      <Button text="Get location" @tap="getLoc"></Button>
+      <MapView @mapReady="mapReady"
+               :latitude="origin.latitude"
+               :longitude="origin.longitude"
+               :zoom="zoom"
+      ></MapView>
     </StackLayout>
+
   </Page>
 </template>
 
 <script>
-  import * as Geolocation from 'nativescript-geolocation';
+  import * as geoLocation from 'nativescript-geolocation';
+  import { Position, Marker } from 'nativescript-google-maps-sdk';
+  import { Accuracy } from 'tns-core-modules/ui/enums';
+  import * as permissions from 'nativescript-permissions';
+  import * as platform from 'platform';
 
   export default {
-    data () {
+    name: 'GeoLocation',
+    data() {
       return {
-        needLocation: true,
-        locationFailure: false,
-        location: null
-      }
-    },
-    computed: {
-      locationDescription () {
-        console.log('----------------------', this.location)
-        return `You are at ${this.location.latitude}, ${this.location.longitude}. Your altitude is ${this.location.altitude}.`;
+        origin: { latitude: 0, longitude: 0 },
+        mapView: null,
+        zoom: 2,
+        myLocationMarker: new Marker()
       }
     },
     methods: {
-      getLoc () {
-        Geolocation.enableLocationRequest(true)
-          .then(() => {
-            console.log('lol')
-            Geolocation.isEnabled().then(isLocationEnabled => {
-              console.log('result isss ' + isLocationEnabled);
-              if (!isLocationEnabled) {
-                this.needLocation = false;
-                this.locationFailure = true;
-                return;
-              }
+      mapReady(args) {
+        this.mapView = args.object;
 
-              Geolocation.getCurrentLocation({})
-                .then(result => {
-                  console.log('loc result ', result);
-                  this.needLocation = false;
-                  this.location = result;
-                })
-                .catch(e => {
-                  console.log('loc error', e);
-                });
-            });
+        permissions.requestPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, "I need these permissions because I'm cool")
+          .then( () => {
+            console.log("Woo Hoo, I have the power!");
+            this.enableMyLocationButton(true);
+            this.addMarkerToMap(this.myLocationMarker, true);
+          })
+          .catch( () => {
+            console.log("Uh oh, no permissions - plan B time!");
           });
-      }
+      },
+      addMarkerToMap(marker, visibility, icon) {
+        marker.position = Position.positionFromLatLng(this.origin.latitude, this.origin.longitude);
+        marker.draggable = true;
+        marker.visible = visibility;
+        if(icon !== undefined)
+          marker.icon = icon;
+        this.mapView.addMarker(marker);
+      },
+      enableMyLocationButton(value) {
+        if (platform.isAndroid) {
+          let uiSettings = this.mapView.gMap.getUiSettings();
+          uiSettings.setMyLocationButtonEnabled(value);
+          /* enable my location button on android */
+          this.mapView.gMap.setMyLocationEnabled(value);
+        } else {
+          /* enable my location button on iOS */
+          this.mapView.gMap.myLocationEnabled = value;
+          this.mapView.gMap.settings.myLocationButton = value;
+        }
+      },
+      fetchMyLocation() {
+        permissions.requestPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, 'I need these permissions because I\'m cool')
+          .then(() => {
+            geoLocation.getCurrentLocation({
+              desiredAccuracy: Accuracy.high,
+              maximumAge: 5000,
+              timeout: 10000
+            }).then(res => {
+              this.origin.latitude = res.latitude;
+              this.origin.longitude = res.longitude;
+              console.log(res)
+            }).catch(e => {
+              console.log(geoLocation.getCurrentLocation())
+              console.log("oh frak, error", e);
+            });
+          })
+          .catch(() => {
+            console.log("Uh oh, no permissions - plan B time!");
+          });
+      },
     }
   }
 </script>

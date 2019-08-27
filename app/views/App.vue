@@ -29,10 +29,6 @@
     components: {
       Home
     },
-    data () {
-      return {
-      }
-    },
     methods: {
       goToBluetoothPage () {
         this.$refs.drawer.close('left')

@@ -14,7 +14,8 @@ Vue.registerElement('ModalStack', () => ModalStack);
 
 Vue.use(VueWindowedModal);
 Vue.use(MultiDrawer);
-Vue.use(MapView);
+
+Vue.registerElement("MapView", () => require("nativescript-google-maps-sdk").MapView);
 
 if(TNS_ENV !== 'production') {
   Vue.use(VueDevtools);
