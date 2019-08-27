@@ -5,7 +5,7 @@
       <Label text="Gesture" @tap="goToGesturePage" />
       <Label text="Voice Recorder" @tap="goToVoiceRecorderPage" />
       <Label text="Camera" @tap="goToCameraPage" />
-      <Label text="Camera" @tap="goToGeoLocPage" />
+      <Label text="Geo Localization" @tap="goToGeoLocPage" />
     </StackLayout>
 
     <Frame ~mainContent id="mainContent">

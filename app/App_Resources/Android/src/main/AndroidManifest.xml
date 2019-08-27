@@ -30,6 +30,7 @@
 			android:theme="@style/LaunchScreenTheme">
 
 			<meta-data android:name="SET_THEME_ON_LAUNCH" android:resource="@style/AppTheme" />
+            <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD1q4LmxYXMH26ZnjAlp8o2sX22t4ztExU" />
 
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
