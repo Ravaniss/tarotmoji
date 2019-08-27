@@ -5,6 +5,7 @@
       <Label text="Gesture" @tap="goToGesturePage" />
       <Label text="Voice Recorder" @tap="goToVoiceRecorderPage" />
       <Label text="Camera" @tap="goToCameraPage" />
+      <Label text="Camera" @tap="goToGeoLocPage" />
     </StackLayout>
 
     <Frame ~mainContent id="mainContent">
@@ -22,6 +23,7 @@
   import Gesture from './Gesture'
   import VoiceRecorder from './VoiceRecorder'
   import Camera from './Camera'
+  import GeoLocation from './GeoLocation'
 
   export default {
     components: {
@@ -48,6 +50,10 @@
         this.$refs.drawer.close('left')
         this.$navigateTo(Camera, {frame: 'mainContent'})
       },
+      goToGeoLocPage () {
+        this.$refs.drawer.close('left')
+        this.$navigateTo(GeoLocation, {frame: 'mainContent'})
+      }
     }
   }
 </script>
