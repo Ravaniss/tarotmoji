@@ -25,7 +25,6 @@
   const fileSystemModule = require('tns-core-modules/file-system');
   import utils from '../api/utils';
   import sounds from '../api/sounds';
-  import Home from './Home';
 
   import ListOfRecords from './ListOfRecords'
 
