@@ -14,7 +14,6 @@
                :zoom="zoom"
       ></MapView>
     </StackLayout>
-
   </Page>
 </template>
 
@@ -39,14 +38,14 @@
       mapReady(args) {
         this.mapView = args.object;
 
-        permissions.requestPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, "I need these permissions because I'm cool")
-          .then( () => {
-            console.log("Woo Hoo, I have the power!");
+        permissions.requestPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, 'I need these permissions because I\'m cool')
+          .then(() => {
+            console.log('Woo Hoo, I have the power!');
             this.enableMyLocationButton(true);
             this.addMarkerToMap(this.myLocationMarker, true);
           })
-          .catch( () => {
-            console.log("Uh oh, no permissions - plan B time!");
+          .catch(() => {
+            console.log('Uh oh, no permissions - plan B time!');
           });
       },
       addMarkerToMap(marker, visibility, icon) {
@@ -71,24 +70,24 @@
       },
       fetchMyLocation() {
         permissions.requestPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, 'I need these permissions because I\'m cool')
-          .then(() => {
-            geoLocation.getCurrentLocation({
-              desiredAccuracy: Accuracy.high,
-              maximumAge: 5000,
-              timeout: 10000
-            }).then(res => {
-              this.origin.latitude = res.latitude;
-              this.origin.longitude = res.longitude;
-              console.log(res)
-            }).catch(e => {
-              console.log(geoLocation.getCurrentLocation())
-              console.log("oh frak, error", e);
-            });
-          })
-          .catch(() => {
-            console.log("Uh oh, no permissions - plan B time!");
+        .then(() => {
+          geoLocation.getCurrentLocation({
+            desiredAccuracy: Accuracy.high,
+            maximumAge: 5000,
+            timeout: 10000
+          }).then(res => {
+            this.origin.latitude = res.latitude;
+            this.origin.longitude = res.longitude;
+            console.log(res)
+          }).catch(e => {
+            console.log(geoLocation.getCurrentLocation())
+            console.log("oh frak, error", e);
           });
-      },
+        })
+        .catch(() => {
+          console.log("Uh oh, no permissions - plan B time!");
+        });
+      }
     }
   }
 </script>
