@@ -7,9 +7,9 @@
     <StackLayout>
       <Label v-if="sounds.length === 0" text="You haven't recorded any sounds yet." />
 
-      <ListView for="sound in sounds" @tap="playSound">
+      <ListView for="sound in sounds">
         <v-template>
-          <Label :text="sound.name" :filename="sound.fileName" @longPress="deleteSound" />
+          <Label :text="sound.name" :filename="sound.fileName" @longPress="deleteSound" @tap="playSound"/>
         </v-template>
       </ListView>
       <Button text="Record New Sounds" @tap="goToRecord" />
@@ -58,24 +58,23 @@
         this.$navigateTo(VoiceRecorder, {frame: 'mainContent'});
       },
       async playSound(event) {
-        console.log(event.item.fileName)
-        /*console.log('play sound tapped', event.item.fileName);
+        const file = event.object.bindingContext.fileName
         let player = new audio.TNSPlayer();
         await player.playFromFile({
-          audioFile:this.audioFolder.path+'/'+event.item.fileName
-        });*/
+          audioFile: `${this.audioFolder.path}/${file}`
+        });
       }
     }
-  };
+  }
 </script>
 
 <style scoped lang="scss">
   // Start custom common variables
   // End custom common variables
   StackLayout {
-    padding: 10px;
+    padding: 10;
   }
   Label {
-    padding: 20px;
+    padding: 30;
   }
 </style>

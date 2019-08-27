@@ -1,5 +1,4 @@
-const appSettings = require("application-settings");
-
+const appSettings = require("tns-core-modules/application-settings");
 
 const sounds = {
   getSounds() {

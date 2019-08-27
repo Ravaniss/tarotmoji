@@ -70,7 +70,7 @@
         });
       },
       onPan() {
-        this.log.unshift({ text: "You performed a pan" });
+        // this.log.unshift({ text: "You performed a pan" });
       },
       onPinch() {
         this.log.unshift({ text: "You performend a pinch" });

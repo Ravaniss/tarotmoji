@@ -63,7 +63,6 @@
     },
     methods: {
       async record() {
-
         // possible clean up
         if(this.lastName) {
           let file = this.audioFolder.getFile(this.lastName);
@@ -73,9 +72,6 @@
         console.log('doRecord Called 1h');
         this.recorder = new audio.TNSRecorder();
         let newName = randomName();
-        /*
-        from the sample app
-        */
         let androidFormat;
         let androidEncoder;
         if (platform.isAndroid) {
@@ -115,7 +111,7 @@
       },
       save() {
         sounds.saveSound(this.name, this.lastName);
-        this.$navigateTo(Home);
+        this.$navigateTo(ListOfRecords, {frame: 'mainContent'})
       },
       goToListOfRecords () {
         this.$navigateTo(ListOfRecords, {frame: 'mainContent'})
