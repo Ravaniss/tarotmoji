@@ -16,12 +16,12 @@
       <Button text="Your Records" @tap="goToListOfRecords" />
     </StackLayout>
   </Page>
-
 </template>
 
 <script>
   const audio = require('nativescript-audio');
   const platform = require('tns-core-modules/platform');
+  const Observable = require("tns-core-modules/data/observable").Observable;
   const fileSystemModule = require('tns-core-modules/file-system');
   import utils from '../api/utils';
   import sounds from '../api/sounds';
@@ -36,17 +36,6 @@
     components: {
       ListOfRecords
     },
-    created() {
-      this.audioFolder = fileSystemModule.knownFolders.currentApp().getFolder('recordings');
-    },
-    computed:{
-      playEnabled() {
-        return this.lastName !== '' && !this.recording;
-      },
-      saveEnabled() {
-        return this.playEnabled && this.name !== '';
-      }
-    },
     data() {
       return {
         name:"",
@@ -56,9 +45,13 @@
         lastName:''
       }
     },
-    errorCaptured(err, vm, info) {
-      console.log('error in component');
-      console.log(err);
+    computed:{
+      playEnabled() {
+        return this.lastName !== '' && !this.recording;
+      },
+      saveEnabled() {
+        return this.playEnabled && this.name !== '';
+      }
     },
     methods: {
       async record() {
@@ -115,7 +108,10 @@
       goToListOfRecords () {
         this.$navigateTo(ListOfRecords, {frame: 'mainContent'})
       }
-    }
+    },
+    created() {
+      this.audioFolder = fileSystemModule.knownFolders.currentApp().getFolder('recordings');
+    },
   }
 </script>
 

@@ -30,10 +30,6 @@
         sounds:[]
       }
     },
-    created() {
-      this.sounds = soundsAPI.getSounds();
-      this.audioFolder = fileSystemModule.knownFolders.currentApp().getFolder('recordings');
-    },
     methods:{
       async deleteSound(event) {
         let filename = event.object.filename;
@@ -64,6 +60,10 @@
           audioFile: `${this.audioFolder.path}/${file}`
         });
       }
+    },
+    created() {
+      this.sounds = soundsAPI.getSounds();
+      this.audioFolder = fileSystemModule.knownFolders.currentApp().getFolder('recordings');
     }
   }
 </script>
