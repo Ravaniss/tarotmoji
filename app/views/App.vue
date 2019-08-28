@@ -6,6 +6,7 @@
       <Label text="Voice Recorder" @tap="goToVoiceRecorderPage" />
       <Label text="Camera" @tap="goToCameraPage" />
       <Label text="Geo Localization" @tap="goToGeoLocPage" />
+      <Label text="NFC" @tap="goToNFCPage" />
     </StackLayout>
 
     <Frame ~mainContent id="mainContent">
@@ -24,6 +25,7 @@
   import VoiceRecorder from './VoiceRecorder'
   import Camera from './Camera'
   import GeoLocation from './GeoLocation'
+  import NFC from './NFC'
 
   export default {
     components: {
@@ -49,6 +51,10 @@
       goToGeoLocPage () {
         this.$refs.drawer.close('left')
         this.$navigateTo(GeoLocation, {frame: 'mainContent'})
+      },
+      goToNFCPage () {
+        this.$refs.drawer.close('left')
+        this.$navigateTo(NFC, {frame: 'mainContent'})
       }
     }
   }
