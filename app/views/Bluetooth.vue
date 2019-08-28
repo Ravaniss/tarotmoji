@@ -45,7 +45,7 @@
           seconds: 4,
           onDiscovered: (peripheral) => {
             this.isBusy = true
-            console.log("Periperhal found with UUID: " + peripheral.UUID)
+            console.log("Peripheral found with UUID: " + peripheral.UUID)
             console.log('Peripheral RSSI: ' + peripheral.RSSI)
             console.log('Peripheral Name: ' + peripheral.name)
           }
@@ -58,7 +58,7 @@
         bluetooth.connect({
           UUID: '3C:BD:3E:6F:8F:72',
           onConnected: function (peripheral) {
-            console.log("Periperhal connected with UUID: " + peripheral.UUID);
+            console.log("Peripheral connected with UUID: " + peripheral.UUID);
 
             // the peripheral object now has a list of available services:
             peripheral.services.forEach(function (service) {
@@ -66,7 +66,7 @@
             });
           },
           onDisconnected: function (peripheral) {
-            console.log("Periperhal disconnected with UUID: " + peripheral.UUID);
+            console.log("Peripheral disconnected with UUID: " + peripheral.UUID);
           }
         })
       },
