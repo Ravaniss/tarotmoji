@@ -5,7 +5,7 @@
       <Button text="Take Picture" @tap="takePicture" />
       <Button text="Choose Picture" @tap="selectPicture" />
       <WrapLayout>
-        <Image v-for="img in images" :src="img.src" width="75" height="75" />
+        <Image for="img in images" :src="img.src" width="75" height="75" />
       </WrapLayout>
     </StackLayout>
   </Page>

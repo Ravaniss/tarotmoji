@@ -6,7 +6,7 @@ import MultiDrawer from 'nativescript-vue-multi-drawer';
 import App from './views/App';
 import store from './store/store';
 
-const MapView = require('nativescript-google-maps-sdk').MapView
+const MapView = require('nativescript-google-maps-sdk').MapView;
 
 overrideModalViewMethod();
 
@@ -15,7 +15,7 @@ Vue.registerElement('ModalStack', () => ModalStack);
 Vue.use(VueWindowedModal);
 Vue.use(MultiDrawer);
 
-Vue.registerElement("MapView", () => require("nativescript-google-maps-sdk").MapView);
+Vue.registerElement('MapView', () => require('nativescript-google-maps-sdk').MapView);
 
 if(TNS_ENV !== 'production') {
   Vue.use(VueDevtools);
