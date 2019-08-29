@@ -66,6 +66,7 @@
 </script>
 
 <style scoped>
+  @import '../app.scss';
   .nav-btn {
     color: #9D95B4;
     margin: 20;
