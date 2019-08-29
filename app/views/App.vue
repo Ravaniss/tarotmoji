@@ -7,6 +7,7 @@
       <Label text="Camera" @tap="goToCameraPage" />
       <Label text="Geo Localization" @tap="goToGeoLocPage" />
       <Label text="NFC" @tap="goToNFCPage" />
+      <Label text="Push Notifications" @tap="goToPushNotificationsPage" />
     </StackLayout>
 
     <Frame ~mainContent id="mainContent">
@@ -26,6 +27,7 @@
   import Camera from './Camera'
   import GeoLocation from './GeoLocation'
   import NFC from './NFC'
+  import PushNotifications from './PushNotifications'
 
   export default {
     components: {
@@ -55,6 +57,10 @@
       goToNFCPage () {
         this.$refs.drawer.close('left')
         this.$navigateTo(NFC, {frame: 'mainContent'})
+      },
+      goToPushNotificationsPage () {
+        this.$refs.drawer.close('left')
+        this.$navigateTo(PushNotifications, {frame: 'mainContent'})
       }
     }
   }
