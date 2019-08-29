@@ -1,7 +1,6 @@
 <template>
   <Page loaded="pageLoaded">
     <ActionBar title="NFC Test"/>
-    <Label text="Hello world !"></Label>
     <StackLayout>
       <Button text="NFC available?" @tap="doCheckAvailable" />
       <Button text="NFC enabled?" @tap="doCheckEnabled" />
