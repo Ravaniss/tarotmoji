@@ -1,12 +1,9 @@
 <template>
   <Page class="page">
-    <ActionBar class="action-bar">
-      <Label class="action-bar-title" text="Records"></Label>
-    </ActionBar>
+    <ActionBar class="action-bar" title="Records"/>
 
     <StackLayout>
       <Label v-if="sounds.length === 0" text="You haven't recorded any sounds yet." />
-
       <ListView for="sound in sounds">
         <v-template>
           <Label :text="sound.name" :filename="sound.fileName" @longPress="deleteSound" @tap="playSound"/>
@@ -72,7 +69,13 @@
   StackLayout {
     padding: 10;
   }
+
   Label {
     padding: 30;
+  }
+
+  ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
   }
 </style>

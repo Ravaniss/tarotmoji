@@ -1,8 +1,6 @@
 <template>
   <Page class="page">
-    <ActionBar class="action-bar">
-      <Label class="action-bar-title" text="Record"></Label>
-    </ActionBar>
+    <ActionBar title="Voice Record" />
 
     <StackLayout>
       <TextField v-model="name" hint="Name for new sound" />
@@ -107,5 +105,9 @@
   }
 </script>
 
-<style>
+<style scoped>
+  ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
+  }
 </style>

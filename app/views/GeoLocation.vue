@@ -3,9 +3,7 @@
     xmlns="http://www.nativescript.org/tns.xsd"
     xmlns:maps="nativescript-google-maps-sdk">
 
-    <ActionBar class="action-bar">
-      <Label class="action-bar-title" text="Geolocation Demo" @tap="fetchMyLocation"></Label>
-    </ActionBar>
+    <ActionBar class="action-bar" title="Geolocation" @tap="fetchMyLocation" />
 
     <StackLayout>
       <MapView @mapReady="mapReady"
@@ -91,3 +89,10 @@
     }
   }
 </script>
+
+<style scoped>
+  ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
+  }
+</style>

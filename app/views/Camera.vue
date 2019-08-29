@@ -1,11 +1,11 @@
 <template>
   <Page>
-    <ActionBar title="Camera Tests FTW!"/>
+    <ActionBar title="Camera !"/>
     <StackLayout>
       <Button text="Take Picture" @tap="takePicture" />
       <Button text="Choose Picture" @tap="selectPicture" />
       <WrapLayout>
-        <Image for="img in images" :src="img.src" width="75" height="75" />
+        <Image v-for="img in images" :src="img.src" width="75" height="75" />
       </WrapLayout>
     </StackLayout>
   </Page>
@@ -64,3 +64,10 @@
     }
   }
 </script>
+
+<style scoped>
+  ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
+  }
+</style>

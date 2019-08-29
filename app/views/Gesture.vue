@@ -1,6 +1,6 @@
 <template>
   <Page class="page">
-    <ActionBar title="Gestures & One/Many fingers detection 👌" class="action-bar"></ActionBar>
+    <ActionBar title="Gestures & One/Many fingers detection 👌" />
     <GridLayout ~mainContent rows="auto, auto, *, auto">
       <Label :text="getDisplayData"></Label>
       <Label row="0" class="target" text="Target Area" @tap="onTap" @doubleTap="onDoubleTap" @longPress="onLongPress" @swipe="onSwipe"
@@ -82,7 +82,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   .target {
     background-color: #9D95B4;
     color: white;
@@ -97,5 +97,9 @@
   }
   .list-group {
    text-align: center;
+  }
+  ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <Page>
-    <ActionBar title="Bluetooth 👌" class="action-bar"></ActionBar>
+    <ActionBar title="Bluetooth 👌" />
     <FlexboxLayout flexDirection="column">
       <Image src="https://play.nativescript.org/dist/assets/img/NativeScript_logo.png" height="90" margin="30 0"/>
       <Button text="is Bluetooth On ?" @tap="isBluetoothOn"/>
@@ -83,10 +83,14 @@
 </script>
 
 <style scoped>
-  Label {
-    height: 50;
-    text-align: center;
-    font-size: 16;
-    padding: 12;
-  }
+Label {
+  height: 50;
+  text-align: center;
+  font-size: 16;
+  padding: 12;
+}
+ActionBar {
+ background-color: #53ba82;
+ color: #ffffff;
+}
 </style>

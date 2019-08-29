@@ -1,6 +1,6 @@
 <template>
   <Page loaded="pageLoaded">
-    <ActionBar title="NFC Test"/>
+    <ActionBar title="NFC"/>
     <StackLayout>
       <Button text="NFC available?" @tap="doCheckAvailable" />
       <Button text="NFC enabled?" @tap="doCheckEnabled" />
@@ -63,3 +63,10 @@
     }
   }
 </script>
+
+<style scoped>
+  ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
+  }
+</style>
