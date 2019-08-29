@@ -1,5 +1,5 @@
 <template>
-  <StackLayout orientation="vertical" backgroundColor="lightgray">
+  <StackLayout orientation="vertical" backgroundColor="lightgray" class="page">
     <GridLayout rows="auto, *, auto" columns="*, *, *">
       <Image src="~/assets/logo.png" width="195" marginTop="20" row="0" col="0" colSpan="4" @tap="currentComponent = 'CardOfTheDay'"/>
       <component
