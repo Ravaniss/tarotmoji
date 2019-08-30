@@ -28,7 +28,6 @@
           onPushTokenReceivedCallback: (token) => {
             console.log("Firebase plugin received a push token: " + token);
           },
-
           onMessageReceivedCallback: (message) => {
             console.log(message)
           },
