@@ -33,18 +33,17 @@
       }
     },
     methods: {
-      mapReady(args) {
+      async mapReady(args) {
         this.mapView = args.object;
 
-        permissions.requestPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, 'I need these permissions because I\'m cool')
-          .then(() => {
-            console.log('Woo Hoo, I have the power!');
-            this.enableMyLocationButton(true);
-            this.addMarkerToMap(this.myLocationMarker, true);
-          })
-          .catch(() => {
-            console.log('Uh oh, no permissions - plan B time!');
-          });
+        const permission = await permissions.requestPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, 'I need these permissions because I\'m cool')
+        console.log(permission)
+
+        if (!Object.values(permission))
+          return false
+
+        this.enableMyLocationButton(true);
+        this.addMarkerToMap(this.myLocationMarker, true);
       },
       addMarkerToMap(marker, visibility, icon) {
         marker.position = Position.positionFromLatLng(this.origin.latitude, this.origin.longitude);
@@ -66,25 +65,24 @@
           this.mapView.gMap.settings.myLocationButton = value;
         }
       },
-      fetchMyLocation() {
-        permissions.requestPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, 'I need these permissions because I\'m cool')
-        .then(() => {
-          geoLocation.getCurrentLocation({
-            desiredAccuracy: Accuracy.high,
-            maximumAge: 5000,
-            timeout: 10000
-          }).then(res => {
-            this.origin.latitude = res.latitude;
-            this.origin.longitude = res.longitude;
-            console.log(res)
-          }).catch(e => {
-            console.log(geoLocation.getCurrentLocation())
-            console.log("oh frak, error", e);
-          });
-        })
-        .catch(() => {
-          console.log("Uh oh, no permissions - plan B time!");
-        });
+      async fetchMyLocation() {
+        const permission = await permissions.requestPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, 'I need these permissions because I\'m cool')
+
+        if (!Object.values(permission))
+          return false
+
+        const data = {
+          desiredAccuracy: Accuracy.high,
+          maximumAge: 5000,
+          timeout: 10000
+        }
+
+        const getCurrentLocation = await geoLocation.getCurrentLocation(data)
+
+        this.origin.latitude = getCurrentLocation.latitude
+        this.origin.longitude = getCurrentLocation.longitude
+
+        console.log(`latitude: ${this.origin.latitude}, longitude: ${this.origin.longitude}`)
       }
     }
   }
