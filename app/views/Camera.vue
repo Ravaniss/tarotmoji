@@ -24,42 +24,34 @@
       }
     },
     methods: {
-      selectPicture () {
+      async selectPicture () {
         let context = imagepicker.create({
           mode: 'multiple'
         });
 
-        context.authorize()
-          .then(function() {
-            return context.present();
-          })
-          .then(selection => {
-            selection.forEach(selected => {
-              console.log(JSON.stringify(selected));
-              let img = new Image();
-              img.src = selected;
-              this.images.push(img);
-            });
-          }).catch(function (e) {
-            console.error('error in selectPicture', e);
-        });
+        const authorize = await context.authorize()
+        if (!Object.values(authorize)) return
+
+        const t = await context.present()
+
+        t.forEach(selected => {
+          let img = new Image();
+          img.src = selected;
+          this.images.push(img);
+        })
       },
       takePicture() {
-        camera.requestPermissions()
-          .then(() => {
-            camera.takePicture({ width: 300, height: 300, keepAspectRatio: true, saveToGallery: false })
-              .then(imageAsset => {
-                let img = new Image();
-                img.src = imageAsset;
-                this.images.push(img);
-              })
-              .catch(e => {
-                console.error('error:', e);
-              });
+        const permission = camera.requestPermissions()
+
+        if (!permission)
+          return false
+
+        camera.takePicture({ width: 300, height: 300, keepAspectRatio: true, saveToGallery: false })
+          .then(imageAsset => {
+            let img = new Image();
+            img.src = imageAsset;
+            this.images.push(img);
           })
-          .catch(e => {
-            console.error('Error requesting permission');
-          });
       }
     }
   }
