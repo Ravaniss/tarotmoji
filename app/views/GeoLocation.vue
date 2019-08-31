@@ -50,7 +50,7 @@
         marker.position = Position.positionFromLatLng(this.origin.latitude, this.origin.longitude);
         marker.draggable = true;
         marker.visible = visibility;
-        if(icon !== undefined)
+        if (icon !== undefined)
           marker.icon = icon;
         this.mapView.addMarker(marker);
       },

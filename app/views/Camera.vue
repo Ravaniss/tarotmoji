@@ -27,7 +27,7 @@
       async selectPicture () {
         let context = imagepicker.create({
           mode: 'multiple'
-        });
+        })
 
         const authorize = await context.authorize()
         if (!Object.values(authorize)) return
@@ -35,9 +35,9 @@
         const t = await context.present()
 
         t.forEach(selected => {
-          let img = new Image();
-          img.src = selected;
-          this.images.push(img);
+          let img = new Image()
+          img.src = selected
+          this.images.push(img)
         })
       },
       takePicture() {
@@ -48,9 +48,9 @@
 
         camera.takePicture({ width: 300, height: 300, keepAspectRatio: true, saveToGallery: false })
           .then(imageAsset => {
-            let img = new Image();
-            img.src = imageAsset;
-            this.images.push(img);
+            let img = new Image()
+            img.src = imageAsset
+            this.images.push(img)
           })
       }
     }
