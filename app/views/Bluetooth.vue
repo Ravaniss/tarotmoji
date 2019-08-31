@@ -1,17 +1,16 @@
 <template>
   <Page>
-    <ActionBar title="Bluetooth 👌" />
+    <ActionBar title="Bluetooth 👌"/>
     <FlexboxLayout flexDirection="column">
       <Image src="https://play.nativescript.org/dist/assets/img/NativeScript_logo.png" height="90" margin="30 0"/>
+      <Label :text="enabled"/>
       <Button text="is Bluetooth On ?" @tap="isBluetoothOn"/>
       <Button text="enable Bluetooth" @tap="enableBluetooth"/>
       <Button text="start Scan" @tap="startScan"/>
       <Button text="connected" @tap="connected"/>
-      <Label text="3" backgroundColor="#CCCCCC"/>
-      <Label text="4" backgroundColor="#BBBBBB"/>
-      <Label text="5" backgroundColor="#AAAAAA"/>
-      <Label text="6" backgroundColor="#999999"/>
+      <Button text="read" @tap="read"/>
       <ActivityIndicator :busy="isBusy" class="activity-indicator"/>
+
     </FlexboxLayout>
   </Page>
 </template>
@@ -27,20 +26,22 @@
     components: {
       Gesture
     },
+    data () {
+      return {
+        deviceConnected: { UUID: '3C:BD:3E:6F:8F:72' },
+        isBusy: false,
+        enabled: null
+      }
+    },
     methods: {
-      isBluetoothOn () {
-        bluetooth.isBluetoothEnabled().then(enabled => {
-          console.log('Enabled? ' + enabled);
-        });
+      async isBluetoothOn () {
+        this.enabled = await bluetooth.isBluetoothEnabled()
       },
-      enableBluetooth () {
-        bluetooth.enable().then((enabled) => {
-          console.log(enabled)
-        })
+      async enableBluetooth () {
+        await bluetooth.enable()
       },
-      startScan () {
-        console.log('Start scanning');
-        bluetooth.startScanning({
+      async startScan () {
+        await bluetooth.startScanning({
           serviceUUIDs: [],
           seconds: 4,
           onDiscovered: (peripheral) => {
@@ -49,34 +50,44 @@
             console.log('Peripheral RSSI: ' + peripheral.RSSI)
             console.log('Peripheral Name: ' + peripheral.name)
           }
-        }).then(
-          () => this.isBusy = false,
-          (err) => console.log("error while scanning: " + err)
-        );
-      },
-      connected () {
-        bluetooth.connect({
-          UUID: '3C:BD:3E:6F:8F:72',
-          onConnected: function (peripheral) {
-            console.log("Peripheral connected with UUID: " + peripheral.UUID);
-
-            // the peripheral object now has a list of available services:
-            peripheral.services.forEach(function (service) {
-              console.log("service found: " + JSON.stringify(service));
-            });
-          },
-          onDisconnected: function (peripheral) {
-            console.log("Peripheral disconnected with UUID: " + peripheral.UUID);
-          }
         })
+        this.isBusy = false
+      },
+      async connected () {
+        const connect = await bluetooth.connect(this.deviceConnected)
+
+        connect.services.forEach((service) => {
+          console.log(`Service found: ${JSON.stringify(service)}`);
+        })
+
+        console.log(`Peripheral connected with UUID: ${connect.UUID}`)
+
+        this.disconneted()
+      },
+      async disconneted () {
+        await bluetooth.disconnect(this.deviceConnected)
+        console.log('Disconnected successfully')
+      },
+      async read () {
+        const connect = await bluetooth.connect(this.deviceConnected)
+        const readValue = connect.services[1].characteristics[0].properties.read
+
+        const readingEnabled = readValue === true
+
+        if (connect.state !== 'connected' || !readingEnabled)
+            return false
+
+        const readDataFrom = {}
+        readDataFrom.peripheralUUID = connect.UUID
+        readDataFrom.serviceUUID = connect.services[1].UUID
+        readDataFrom.characteristicUUID = connect.services[1].characteristics[0].UUID
+
+        const read = await bluetooth.read(readDataFrom)
+        const data = new Uint8Array(read.value)
+        console.log(`Example: Your heartrate is ${data[1]} bpm.`)
       },
       goToGesturePage () {
         this.$navigateTo(Gesture, {frame: 'mainContent'})
-      }
-    },
-    data () {
-      return {
-        isBusy: false
       }
     }
   }
