@@ -28,9 +28,10 @@
     },
     data () {
       return {
-        deviceConnected: { UUID: '3C:BD:3E:6F:8F:72' },
+        deviceConnected: { UUID: '74:29:AF:80:17:BA' },
         isBusy: false,
-        enabled: null
+        enabled: null,
+        service: '13333333333333333333333333333337'
       }
     },
     methods: {
@@ -51,10 +52,12 @@
             console.log('Peripheral Name: ' + peripheral.name)
           }
         })
+
         this.isBusy = false
       },
       async connected () {
         const connect = await bluetooth.connect(this.deviceConnected)
+        console.log(connect)
 
         connect.services.forEach((service) => {
           console.log(`Service found: ${JSON.stringify(service)}`);
@@ -69,7 +72,9 @@
         console.log('Disconnected successfully')
       },
       async read () {
+        console.log('bonjour ?')
         const connect = await bluetooth.connect(this.deviceConnected)
+        console.log(connect)
         const readValue = connect.services[1].characteristics[0].properties.read
 
         const readingEnabled = readValue === true
